@@ -1,0 +1,7 @@
+pnpm-lock.yaml
+**/dist
+**/storybook-static
+packages/web/src/styles/tokens.css
+packages/flutter
+.claude
+.agents
