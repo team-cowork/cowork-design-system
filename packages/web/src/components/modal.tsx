@@ -1,0 +1,89 @@
+'use client';
+
+import { type ReactNode, useEffect, useRef } from 'react';
+
+import { tv } from 'tailwind-variants';
+
+import { useScrollLock } from '../lib/use-scroll-lock.js';
+import { CloseIcon } from '../icons/close-icon.js';
+
+const modal = tv({
+  slots: {
+    base: 'm-auto max-h-[85vh] w-[480px] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-[20px] bg-surface text-on-surface backdrop:bg-black/55',
+    header:
+      'flex shrink-0 items-center justify-between border-b border-outline-variant py-[18px] pr-5 pl-6',
+    title: 'typography-title-small text-on-surface',
+    close:
+      'flex size-6 cursor-pointer items-center justify-center text-on-surface-variant hover:text-on-surface',
+    closeIcon: 'size-5',
+    body: 'flex min-h-0 flex-1 [scrollbar-gutter:stable_both-edges] flex-col gap-3 overflow-y-auto px-6 py-5 [&>*]:shrink-0',
+    footer:
+      'flex shrink-0 justify-end gap-2.5 border-t border-outline-variant px-6 pt-4 pb-5',
+  },
+  variants: {
+    open: {
+      true: { base: 'flex' },
+      false: { base: 'hidden' },
+    },
+  },
+});
+
+export interface ModalProps {
+  open: boolean;
+  onClose: () => void;
+  title: string;
+  children?: ReactNode;
+  /** 하단 액션 영역 (버튼 등) */
+  footer?: ReactNode;
+  className?: string;
+}
+
+export function Modal({
+  open,
+  onClose,
+  title,
+  children,
+  footer,
+  className,
+}: ModalProps) {
+  const ref = useRef<HTMLDialogElement>(null);
+  const styles = modal({ open });
+
+  useEffect(() => {
+    const dialog = ref.current;
+    if (!dialog) return;
+    if (open && !dialog.open) dialog.showModal();
+    if (!open && dialog.open) dialog.close();
+  }, [open]);
+
+  useScrollLock(open);
+
+  return (
+    <dialog
+      ref={ref}
+      // React는 `<dialog>`의 `close` 이벤트를 fiber 트리를 따라 위로 전파하므로,
+      // 중첩된 Modal이 닫힐 때 바깥 Modal까지 닫히지 않게 자기 dialog의 이벤트만 처리한다.
+      onClose={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
+      onClick={(e) => {
+        if (e.target === ref.current) onClose();
+      }}
+      className={styles.base({ class: className })}
+    >
+      <div className={styles.header()}>
+        <h2 className={styles.title()}>{title}</h2>
+        <button
+          type="button"
+          aria-label="닫기"
+          onClick={onClose}
+          className={styles.close()}
+        >
+          <CloseIcon className={styles.closeIcon()} />
+        </button>
+      </div>
+      {children && <div className={styles.body()}>{children}</div>}
+      {footer && <div className={styles.footer()}>{footer}</div>}
+    </dialog>
+  );
+}
