@@ -1,0 +1,12 @@
+name: cowork_design_tokens
+description: Cowork 디자인 토큰. 레포 루트의 tokens/*.json에서 생성한다.
+version: 0.1.0
+publish_to: 'none'
+
+environment:
+  sdk: ^3.9.2
+  flutter: ">=3.35.0"
+
+dependencies:
+  flutter:
+    sdk: flutter

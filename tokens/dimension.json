@@ -1,0 +1,39 @@
+{
+  "spacing": {
+    "$type": "dimension",
+    "4": { "$value": 4 },
+    "6": { "$value": 6 },
+    "8": { "$value": 8 },
+    "10": { "$value": 10 },
+    "12": { "$value": 12 },
+    "14": { "$value": 14 },
+    "16": { "$value": 16 },
+    "18": { "$value": 18 },
+    "20": { "$value": 20 },
+    "24": { "$value": 24 },
+    "32": { "$value": 32 }
+  },
+  "radius": {
+    "$type": "dimension",
+    "4": { "$value": 4 },
+    "6": { "$value": 6 },
+    "8": { "$value": 8 },
+    "10": { "$value": 10 },
+    "12": { "$value": 12 },
+    "14": { "$value": 14 },
+    "16": { "$value": 16 },
+    "20": { "$value": 20 },
+    "24": { "$value": 24 }
+  },
+  "size": {
+    "$type": "dimension",
+    "component-small": { "$value": 36 },
+    "component-medium": { "$value": 44 },
+    "component-large": { "$value": 52 },
+    "icon-x-small": { "$value": 16 },
+    "icon-small": { "$value": 18 },
+    "icon-medium": { "$value": 20 },
+    "icon-large": { "$value": 24 },
+    "icon-container": { "$value": 48 }
+  }
+}
