@@ -67,6 +67,13 @@ CoworkTypography.labelSmall;
 CoworkSpacing.s16;
 ```
 
+## 버전 태그
+
+앱은 `ref: v0.1.0`처럼 git 태그로 이 레포를 받습니다. `pubspec.lock`은 태그가 가리키던 커밋을 기록하므로, 같은 이름의 태그를 다른 커밋으로 옮기면 lock을 그대로 쓰는 쪽과 다시 만든 쪽이 서로 다른 값을 받습니다.
+
+- 값을 바꿀 때는 기존 태그를 옮기지 않고 새 버전 태그(`v0.1.1`, `v0.2.0` 등)를 붙입니다.
+- `v*` 태그는 Repository ruleset으로 갱신과 삭제를 막아 두었습니다.
+
 ## npm 배포
 
 배포 전에 npm에 `team-cowork` org가 있어야 합니다(public 패키지는 무료).
